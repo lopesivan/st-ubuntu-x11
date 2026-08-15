@@ -10,20 +10,18 @@ OBJ = $(SRC:.c=.o)
 all: options st
 
 options:
-	@echo st build options:
+	@echo "st build options:"
 	@echo "CFLAGS  = $(STCFLAGS)"
 	@echo "LDFLAGS = $(STLDFLAGS)"
 	@echo "CC      = $(CC)"
 
 .c.o:
-	$(CC) $(STCFLAGS) -c $<
+	$(CC) $(STCFLAGS) -c $< -o $@
 
-st.o: config.h st.h win.h
-x.o: arg.h config.h st.h win.h hb.h
-hb.o: st.h
-boxdraw.o: config.h st.h boxdraw_data.h
-
-$(OBJ): config.h config.mk
+st.o: st.c config.h config.mk st.h win.h
+x.o: x.c arg.h config.h st.h win.h hb.h
+hb.o: hb.c st.h
+boxdraw.o: boxdraw.c config.h st.h boxdraw_data.h
 
 st: $(OBJ)
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
@@ -33,27 +31,18 @@ clean:
 
 dist: clean
 	mkdir -p st-$(VERSION)
-	cp -R FAQ LEGACY TODO LICENSE Makefile README config.mk\
-		config.def.h st.info st.1 arg.h st.h win.h $(SRC)\
+	cp -R config.mk Makefile\
+		config $(SRC) \
 		st-$(VERSION)
 	tar -cf - st-$(VERSION) | gzip > st-$(VERSION).tar.gz
 	rm -rf st-$(VERSION)
 
 install: st
-	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f st $(DESTDIR)$(PREFIX)/bin
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/st
-	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
-	sed "s/VERSION/$(VERSION)/g" < st.1 > $(DESTDIR)$(MANPREFIX)/man1/st.1
-	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.1
-	tic -sx st.info
-	@echo Please see the README file regarding the terminfo entry of st.
-	mkdir -p $(DESTDIR)$(PREFIX)/share/applications
-	cp -f st.desktop $(DESTDIR)$(PREFIX)/share/applications
+	install -d $(DESTDIR)$(PREFIX)/bin
+	install -m 755 st $(DESTDIR)$(PREFIX)/bin/st
+	@echo "st instalado em $(DESTDIR)$(PREFIX)/bin/st"
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
-	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
-	rm -f $(DESTDIR)$(PREFIX)/share/applications/st.desktop
 
 .PHONY: all options clean dist install uninstall
