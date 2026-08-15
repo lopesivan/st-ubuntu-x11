@@ -1,0 +1,31 @@
+local condition = require("yabs.conditions").file_exists("Makefile")
+
+local function make_theme(theme)
+  return {
+    command = function()
+      require("overseer").run_template({
+        name = "[overseer] make",
+        params = {
+          variables = {
+            "THEME=" .. theme,
+          },
+        },
+      })
+    end,
+    condition = condition,
+    type = "lua",
+  }
+end
+
+return {
+  tasks = {
+    ["make THEME=CLASSIC"] = make_theme("CLASSIC"),
+    ["make THEME=MATRIX"] = make_theme("MATRIX"),
+    ["make THEME=DRACULA"] = make_theme("DRACULA"),
+    ["make THEME=NORD"] = make_theme("NORD"),
+    ["make THEME=GRUVBOX"] = make_theme("GRUVBOX"),
+    ["make THEME=SOLARIZED_DARK"] = make_theme("SOLARIZED_DARK"),
+    ["make THEME=TOKYO_NIGHT"] = make_theme("TOKYO_NIGHT"),
+    ["make THEME=AMBER"] = make_theme("AMBER"),
+  },
+}
