@@ -1,3 +1,6 @@
+#ifndef ST_KEYS_H
+#define ST_KEYS_H
+
 /*
  * State bits to ignore when matching key or button events.  By default,
  * numlock (Mod2Mask) and keyboard layout (XK_SWITCH_MOD) are ignored.
@@ -829,3 +832,5 @@ static Key key[] = {
     
     
 };
+
+#endif		// ST_KEYS_H
