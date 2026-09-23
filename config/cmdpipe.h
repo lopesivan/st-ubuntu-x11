@@ -1,3 +1,6 @@
+#ifndef ST_CMDPIPE_H
+#define ST_CMDPIPE_H
+
 #define URL_MENU_FONT       "Droid Sans Mono-25"
 #define URL_MENU_LINES      "52"
 #define URL_MENU_NORMAL_FG  "yellow"
@@ -50,3 +53,5 @@ static char *openurlcmd[] = {
 };
 
 */
+
+#endif		// ST_CMDPIPE_H
