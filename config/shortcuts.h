@@ -1,3 +1,6 @@
+#ifndef ST_SHORTCUTS_H
+#define ST_SHORTCUTS_H
+
 static Shortcut shortcuts[] = {
     /* mask        keysym        function       argument */
     {XK_ANY_MOD, XK_Break, sendbreak, {.i = 0}},
@@ -32,3 +35,5 @@ static Shortcut shortcuts[] = {
     {TERMMOD, XK_k, kscrollup, {.i = 1}},
     {TERMMOD, XK_j, kscrolldown, {.i = 1}},
 };
+
+#endif		// ST_SHORTCUTS_H
