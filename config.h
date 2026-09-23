@@ -1,5 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
+#ifndef ST_CONFIG_H
+#define ST_CONFIG_H
+
 #include "config/fonts.h"
 
 /* Kerning / character bounding-box multipliers */
@@ -197,3 +200,5 @@ static uint selmasks[] = {
 static char ascii_printable[] = " !\"#$%&'()*+,-./0123456789:;<=>?"
                                 "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
                                 "`abcdefghijklmnopqrstuvwxyz{|}~";
+
+#endif		// ST_CONFIG_H
